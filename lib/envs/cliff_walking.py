@@ -62,14 +62,14 @@ class CliffWalkingEnv(discrete.DiscreteEnv):
         return converted
     def reset(self):
         self.s = np.argmax(self.isd)
-        return self._convert_state2(self.s)
+        return self._convert_state(self.s)
     
     def step(self, action):
         reward = self.P[self.s][action][0][2]
         done = self.P[self.s][action][0][3]
         info = {'prob':self.P[self.s][action][0][0]}
         self.s = self.P[self.s][action][0][1]
-        return (self._convert_state2(self.s), reward, done, info)
+        return (self._convert_state(self.s), reward, done, info)
     
     def render(self, mode='rgb_array', close=False):
         if close:
